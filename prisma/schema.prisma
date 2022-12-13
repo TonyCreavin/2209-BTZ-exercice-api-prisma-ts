@@ -11,61 +11,34 @@ datasource db {
 }
 
 model Author {
-  id String @id @unique @default(uuid())
-
-  name String
-
-  password String
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-collections Collection[]
-
-  books Book[]
-
-  
+  id          String       @id @unique @default(uuid())
+  name        String
+  password    String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  collections Collection[]
+  books       Book[]
 }
 
 model Book {
-  id String @id @unique @default(uuid())
-
-  title String
-
-  content String
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  collection Collection @relation(fields: [collectionId], references: [id])
-
+  id           String     @id @unique @default(uuid())
+  title        String
+  content      String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  collection   Collection @relation(fields: [collectionId], references: [id])
   collectionId String
-
-  author Author @relation(fields: [authorId], references: [id])
-
-  authorId String
-
-  isDisabled Boolean @default(false)
+  author       Author     @relation(fields: [authorId], references: [id])
+  authorId     String
+  isDisabled   Boolean    @default(false)
 }
 
 model Collection {
-  id String @id @unique @default(uuid())
-
-  name String
-
+  id        String   @id @unique @default(uuid())
+  name      String
   createdAt DateTime @default(now())
-
   updatedAt DateTime @updatedAt
-
-  author Author @relation(fields: [authorId], references: [id])
-
-  authorId String
-
-  books Book[]
-
-
-
-
+  author    Author   @relation(fields: [authorId], references: [id])
+  authorId  String
+  books     Book[]
 }
